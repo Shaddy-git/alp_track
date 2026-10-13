@@ -1,4 +1,3 @@
-# backend/app.py
 from flask import Flask, jsonify
 from config import Config
 from extensions import db, migrate, jwt
@@ -14,8 +13,12 @@ def create_app(config_class=Config):
     db.init_app(app)
     migrate.init_app(app, db)
     jwt.init_app(app)
+
+    # CORS - разрешаем запросы от frontend
+    from flask_cors import CORS
+    CORS(app, resources={r"/api/*": {"origins": "*"}})
     
-    # Импорт моделей — ВАЖНО до миграций!
+    # Импорт моделей - ВАЖНО до миграций!
     from models import user, mountain, group, ascent  # noqa: F401
     
     # Регистрация blueprints (маршрутов)
