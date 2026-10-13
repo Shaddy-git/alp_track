@@ -19,9 +19,10 @@ def create_app(config_class=Config):
     from models import user, mountain, group, ascent  # noqa: F401
     
     # Регистрация blueprints (маршрутов)
-    # Пока закомментируем — routes появятся в блоке 3
-    # from routes.auth import auth_bp
-    # app.register_blueprint(auth_bp, url_prefix='/api/auth')
+    from routes.auth import auth_bp
+    app.register_blueprint(auth_bp, url_prefix='/api/auth')
+    from routes.groups import groups_bp
+    app.register_blueprint(groups_bp, url_prefix='/api/groups')
     
     # Health-check (пункт 6 задания)
     @app.route('/health')
