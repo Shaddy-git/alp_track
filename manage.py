@@ -1,4 +1,4 @@
-# manage.py — точка входа для Flask CLI
+# manage.py - точка входа для Flask CLI
 import os
 import sys
 
