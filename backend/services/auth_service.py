@@ -4,7 +4,7 @@ from extensions import db
 from models.user import User
 
 
-def register_user(username: str, email: str, password: str, experience_level: int = 1) -> User:
+def register_user(username: str, email: str, password: str, experience_level: int = 1,  full_name: str = None) -> User:
     """Регистрирует нового пользователя.
     
     Raises:

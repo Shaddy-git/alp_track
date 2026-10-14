@@ -40,6 +40,7 @@ def register():
             "id": user.id,
             "username": user.username,
             "email": user.email,
+            "full_name": user.full_name,
             "role": user.role,
             "experience_level": user.experience_level
         }
