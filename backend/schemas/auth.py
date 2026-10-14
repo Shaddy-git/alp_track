@@ -1,4 +1,3 @@
-# backend/schemas/auth.py
 from marshmallow import Schema, fields, validate
 
 
@@ -10,6 +9,10 @@ class RegisterSchema(Schema):
         validate=validate.Length(min=3, max=80)
     )
     email = fields.Email(required=True)
+    full_name = fields.Str(
+        validate=validate.Length(max=120),
+        load_default=None
+    )
     password = fields.Str(
         required=True,
         validate=validate.Length(min=6, max=128),

@@ -27,6 +27,7 @@ def register():
         user = register_user(
             username=data['username'],
             email=data['email'],
+            full_name=data.get('full_name'), 
             password=data['password'],
             experience_level=data.get('experience_level', 1)
         )
@@ -47,7 +48,7 @@ def register():
 
 @auth_bp.route('/login', methods=['POST'])
 def login():
-    """Вход в систему — возвращает JWT."""
+    """Вход в систему - возвращает JWT."""
     schema = LoginSchema()
     
     try:
@@ -72,6 +73,7 @@ def login():
         "user": {
             "id": user.id,
             "username": user.username,
+            "full_name": user.full_name,
             "role": user.role,
             "experience_level": user.experience_level
         }
@@ -92,6 +94,7 @@ def me():
         "id": user.id,
         "username": user.username,
         "email": user.email,
+        "full_name": user.full_name,
         "role": user.role,
         "experience_level": user.experience_level
     }), 200
