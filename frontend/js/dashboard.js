@@ -1,8 +1,12 @@
-// frontend/js/dashboard.js
-
 // Требуем авторизацию
 if (!requireAuth()) {
     throw new Error('Not authenticated');
+}
+// Показываем блок отчётов для admin/instructor
+const user = getCurrentUser();
+if (user && ['admin', 'instructor'].includes(user.role)) {
+    const reportsCard = document.getElementById('reportsCard');
+    if (reportsCard) reportsCard.style.display = 'block';
 }
 
 async function loadDashboard() {
@@ -27,8 +31,6 @@ async function loadDashboard() {
 async function loadProfile() {
     try {
         const user = await api.me();
-        document.getElementById('userInfo').textContent = `Привет, ${user.username}!`;
-        
         document.getElementById('profileInfo').innerHTML = `
             <li><strong>ID:</strong> ${user.id}</li>
             <li><strong>Имя:</strong> ${user.username}</li>
