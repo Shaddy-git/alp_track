@@ -30,6 +30,8 @@ def create_app(config_class=Config):
     app.register_blueprint(groups_bp, url_prefix='/api/groups')
     from routes.mountains import mountains_bp
     app.register_blueprint(mountains_bp, url_prefix='/api/mountains')
+    from routes.ascents import ascents_bp
+    app.register_blueprint(ascents_bp, url_prefix='/api/ascents')
     
     # Health-check (пункт 6 задания)
     @app.route('/health')
