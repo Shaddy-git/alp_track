@@ -247,3 +247,8 @@ body {
     padding: 0.35rem 0.7rem;
     border-radius: 6px;
 }
+
+.filter-buttons .btn {
+    min-width: 120px;
+    padding: 0.65rem 1rem;
+}
