@@ -56,8 +56,41 @@ const api = {
     
     // --- Группы ---
     listGroups: () => apiRequest('/groups'),
+    getGroup: (id) => apiRequest(`/groups/${id}`),
     createGroup: (data) => apiRequest('/groups', 'POST', data),
+    updateGroup: (id, data) => apiRequest(`/groups/${id}`, 'PUT', data),
+    deleteGroup: (id) => apiRequest(`/groups/${id}`, 'DELETE'),
     addMember: (groupId, userId) => apiRequest(`/groups/${groupId}/members`, 'POST', { user_id: userId }),
+    removeMember: (groupId, userId) => apiRequest(`/groups/${groupId}/members/${userId}`, 'DELETE'),
+    joinGroup: (groupId) => apiRequest(`/groups/${groupId}/join`, 'POST'),
+    
+    // --- Горы ---
+    listMountains: (params = '') => apiRequest(`/mountains${params}`),
+    getMountain: (id) => apiRequest(`/mountains/${id}`),
+    createMountain: (data) => apiRequest('/mountains', 'POST', data),
+    updateMountain: (id, data) => apiRequest(`/mountains/${id}`, 'PUT', data),
+    deleteMountain: (id) => apiRequest(`/mountains/${id}`, 'DELETE'),
+    
+    // --- Восхождения ---
+    listAscents: () => apiRequest('/ascents'),
+    myAscents: () => apiRequest('/ascents/my'),
+    getAscent: (id) => apiRequest(`/ascents/${id}`),
+    createAscent: (data) => apiRequest('/ascents', 'POST', data),
+    updateAscent: (id, data) => apiRequest(`/ascents/${id}`, 'PUT', data),
+    deleteAscent: (id) => apiRequest(`/ascents/${id}`, 'DELETE'),
+    
+    // --- Пользователи ---
+    listUsers: () => apiRequest('/users'),
+    getUser: (id) => apiRequest(`/users/${id}`),
+    updateUser: (id, data) => apiRequest(`/users/${id}`, 'PUT', data),
+    deleteUser: (id) => apiRequest(`/users/${id}`, 'DELETE'),
+    changeRole: (id, role) => apiRequest(`/users/${id}/role`, 'PUT', { role }),
+    
+    // --- Отчёты ---
+    climbersByMountain: (id) => apiRequest(`/reports/climbers-by-mountain/${id}`),
+    successfulAscents: (year) => apiRequest(`/reports/successful-ascents?year=${year}`),
+    popularMountains: (limit = 5) => apiRequest(`/reports/popular-mountains?limit=${limit}`),
+    userStats: (id) => apiRequest(`/reports/user-stats/${id}`),
 };
 
 

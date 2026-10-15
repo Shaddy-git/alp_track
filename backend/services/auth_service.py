@@ -4,7 +4,7 @@ from extensions import db
 from models.user import User
 
 
-def register_user(username: str, email: str, password: str, experience_level: int = 1) -> User:
+def register_user(username: str, email: str, password: str, experience_level: int = 1,  full_name: str = None) -> User:
     """Регистрирует нового пользователя.
     
     Raises:
@@ -22,9 +22,10 @@ def register_user(username: str, email: str, password: str, experience_level: in
     user = User(
         username=username,
         email=email,
+        full_name=full_name,
         password_hash=generate_password_hash(password),
         experience_level=experience_level,
-        role='climber'  # по умолчанию — обычный альпинист
+        role='climber'  # по умолчанию - обычный альпинист
     )
     
     db.session.add(user)

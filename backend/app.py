@@ -8,6 +8,8 @@ def create_app(config_class=Config):
     
     app = Flask(__name__)
     app.config.from_object(config_class)
+
+    app.json.ensure_ascii = False
     
     # Инициализация расширений
     db.init_app(app)
@@ -26,6 +28,14 @@ def create_app(config_class=Config):
     app.register_blueprint(auth_bp, url_prefix='/api/auth')
     from routes.groups import groups_bp
     app.register_blueprint(groups_bp, url_prefix='/api/groups')
+    from routes.mountains import mountains_bp
+    app.register_blueprint(mountains_bp, url_prefix='/api/mountains')
+    from routes.ascents import ascents_bp
+    app.register_blueprint(ascents_bp, url_prefix='/api/ascents')
+    from routes.users import users_bp
+    app.register_blueprint(users_bp, url_prefix='/api/users')
+    from routes.reports import reports_bp
+    app.register_blueprint(reports_bp, url_prefix='/api/reports')
     
     # Health-check (пункт 6 задания)
     @app.route('/health')
