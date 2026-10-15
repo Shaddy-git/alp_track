@@ -133,6 +133,19 @@ def create_ascent(user_id: int, mountain_id: int, group_id, ascent_date,
     dates_ok, dates_error = validate_ascent_dates(group_id, ascent_date)
     if not dates_ok:
         return False, dates_error, None
+
+    # Проверка: такое восхождение уже существует?
+    existing = Ascent.query.filter_by(
+        user_id=user_id,
+        mountain_id=mountain_id,
+        ascent_date=ascent_date
+    ).first()
+    
+    if existing:
+        return False, (
+            f"Восхождение {user.username} на {mountain.name} "
+            f"от {ascent_date} уже зафиксировано (id={existing.id})"
+        ), None
     
     # Создание
     ascent = Ascent(
