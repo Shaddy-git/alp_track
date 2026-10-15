@@ -32,6 +32,8 @@ def create_app(config_class=Config):
     app.register_blueprint(mountains_bp, url_prefix='/api/mountains')
     from routes.ascents import ascents_bp
     app.register_blueprint(ascents_bp, url_prefix='/api/ascents')
+    from routes.users import users_bp
+    app.register_blueprint(users_bp, url_prefix='/api/users')
     
     # Health-check (пункт 6 задания)
     @app.route('/health')
