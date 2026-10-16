@@ -1,0 +1,26 @@
+[Unit]
+Description=alp_track Flask application (educational)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=appuser
+Group=appuser
+WorkingDirectory=/opt/myapp
+Environment=PYTHONPATH=/opt/myapp/backend
+Environment=HOME=/var/lib/myapp
+EnvironmentFile=/etc/myapp/app.env
+ExecStart=/opt/myapp/venv/bin/gunicorn --workers 2 --bind 0.0.0.0:8000 --access-logfile - --error-logfile - "app:create_app()"
+Restart=on-failure
+RestartSec=5
+StartLimitIntervalSec=60
+StartLimitBurst=5
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=full
+ProtectHome=true
+ReadWritePaths=/var/log/myapp /var/lib/myapp
+
+[Install]
+WantedBy=multi-user.target
