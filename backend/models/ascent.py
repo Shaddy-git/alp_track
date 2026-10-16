@@ -1,4 +1,3 @@
-# backend/models/ascent.py
 from datetime import date
 from sqlalchemy import Date, Integer, ForeignKey, Boolean, Text
 from sqlalchemy.orm import Mapped, mapped_column, relationship

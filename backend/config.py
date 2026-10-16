@@ -1,4 +1,4 @@
-# backend/config.py
+
 import os
 from dotenv import load_dotenv
 
@@ -8,7 +8,7 @@ load_dotenv()
 class Config:
     """Базовая конфигурация приложения.
     
-    Все секреты читаются из .env — они не должны быть в коде.
+    Все секреты читаются из .env - они не должны быть в коде.
     """
     # Строка подключения к PostgreSQL
     SQLALCHEMY_DATABASE_URI = os.getenv("DATABASE_URL")
@@ -25,5 +25,5 @@ class Config:
     # Время жизни access-токена: 1 час
     JWT_ACCESS_TOKEN_EXPIRES = 3600
     
-    # Режим отладки (в продакшене — False)
+    # Режим отладки 
     DEBUG = os.getenv("FLASK_DEBUG", "False").lower() == "true"

@@ -87,7 +87,7 @@ def create():
     except ValidationError as err:
         return jsonify({"error": "Ошибка валидации", "details": err.messages}), 400
     
-    # Вызов сервиса — там все бизнес-правила
+    # Вызов сервиса - там все бизнес-правила
     success, message, ascent = create_ascent(
         user_id=data['user_id'],
         mountain_id=data['mountain_id'],

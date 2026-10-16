@@ -1,11 +1,10 @@
-# backend/models/group.py
 from datetime import date
 from sqlalchemy import String, Date, Integer, ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from extensions import db
 
 
-# Промежуточная таблица для связи M:N «альпинисты ↔ группы»
+# Промежуточная таблица для связи M:N альпинисты ↔ группы
 group_members = db.Table(
     'group_members',
     db.Column('group_id', db.Integer, db.ForeignKey('groups.id'), primary_key=True),
