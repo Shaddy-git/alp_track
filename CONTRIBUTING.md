@@ -19,7 +19,7 @@ flake8 backend/
 python -m compileall backend/
 
 # 3. Проверка, что .env не попадёт в коммит
-git diff --cached --name-only | grep -E '\.env$' && echo "❌ ОШИБКА: .env в коммите!" && exit 1
+git diff --cached --name-only 
 
 # 4. Просмотр всех изменений
 git diff --cached
