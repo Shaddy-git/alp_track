@@ -1,6 +1,12 @@
 if (!requireAuth()) {
     throw new Error('Not authenticated');
 }
+// Показ кнопки Добавить гору для admin/instructor
+const user = getCurrentUser();
+if (user && ['admin', 'instructor'].includes(user.role)) {
+    const btn = document.getElementById('addMountainBtn');
+    if (btn) btn.style.display = 'inline-block';
+}
 
 // Показываем ссылку Отчёты для admin/instructor
 const currentUser = getCurrentUser();
@@ -60,6 +66,39 @@ function resetFilters() {
     document.getElementById('minHeight').value = '';
     document.getElementById('maxDifficulty').value = '';
     loadMountains();
+}
+
+// === Создание горы ===
+
+let mountainModal = null;
+
+function showAddMountainModal() {
+    if (!mountainModal) {
+        mountainModal = new bootstrap.Modal(document.getElementById('addMountainModal'));
+    }
+    document.getElementById('addMountainForm').reset();
+    document.getElementById('mountainError').textContent = '';
+    mountainModal.show();
+}
+
+async function createMountain() {
+    const errorEl = document.getElementById('mountainError');
+    errorEl.textContent = '';
+    
+    const data = {
+        name: document.getElementById('mountainName').value.trim(),
+        height: parseInt(document.getElementById('mountainHeight').value, 10),
+        country: document.getElementById('mountainCountry').value.trim(),
+        difficulty_level: parseInt(document.getElementById('mountainDifficulty').value, 10)
+    };
+    
+    try {
+        await api.createMountain(data);
+        mountainModal.hide();
+        loadMountains();   // перезагрузить список
+    } catch (err) {
+        errorEl.textContent = err.message;
+    }
 }
 
 loadMountains();

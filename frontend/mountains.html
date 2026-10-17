@@ -22,8 +22,11 @@
 
 <div class="container py-5">
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2>Каталог гор</h2>
-    </div>
+    <h2>Каталог гор</h2>
+    <button class="btn btn-primary" id="addMountainBtn" style="display:none;" onclick="showAddMountainModal()">
+        + Добавить гору
+    </button>
+</div>
     
     <!-- Фильтры -->
     <div class="card mb-4">
@@ -59,6 +62,51 @@
 </div>
 
 <script src="js/api.js"></script>
+<!-- Модальное окно создания горы -->
+<div class="modal fade" id="addMountainModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Добавить гору</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="addMountainForm">
+                    <div class="mb-3">
+                        <label class="form-label">Название</label>
+                        <input type="text" class="form-control" id="mountainName" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Высота (м)</label>
+                        <input type="number" class="form-control" id="mountainHeight" required min="1">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Страна</label>
+                        <input type="text" class="form-control" id="mountainCountry" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Сложность (1–5)</label>
+                        <select class="form-select" id="mountainDifficulty">
+                            <option value="1">1 — Новичок</option>
+                            <option value="2">2 — Начинающий</option>
+                            <option value="3" selected>3 — Средний</option>
+                            <option value="4">4 — Опытный</option>
+                            <option value="5">5 — Эксперт</option>
+                        </select>
+                    </div>
+                    <div id="mountainError" class="error-message"></div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                <button type="button" class="btn btn-primary" onclick="createMountain()">Создать</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Подключаем Bootstrap JS для модального окна -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="js/mountains.js"></script>
 </body>
 </html>
