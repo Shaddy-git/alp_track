@@ -23,3 +23,6 @@ python-dotenv==1.2.4
 
 # WSGI-сервер для продакшена
 gunicorn==26.2.0
+
+# psycopg
+psycopg[binary]==3.3.9

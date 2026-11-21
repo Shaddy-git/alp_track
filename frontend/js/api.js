@@ -1,6 +1,6 @@
 // Общая обёртка над fetch для работы с API AlpTrack
 
-const API_URL = 'http://localhost:5000/api';
+const API_URL = '/api';
 
 /**
  * Обёртка над fetch с автоматической подстановкой JWT.
