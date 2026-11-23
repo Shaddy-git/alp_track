@@ -6,14 +6,14 @@ cd "$PROJECT_ROOT"
 
 echo "=== Alp_track: Initial Setup ==="
 
-if ! command -v python3 >/dev/null 2>$&1; then
+if ! command -v python3 >/dev/null 2>&1; then
     echo "ERROR: Python3 is not installed"
     exit 1
 fi
 
 python3 --version
 
-if [! -x ".venv/bin/python" ]; then
+if [ ! -x ".venv/bin/python" ]; then
     echo "Creating virtual environment..."
     python3 -m venv .venv
 fi
