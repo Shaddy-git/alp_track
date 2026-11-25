@@ -11,6 +11,12 @@ if ($LASTEXITCODE -ne 0) {
     throw "Python is not available"
 }
 
+$PythonVersion = python -c "import sys; print(f'{sys.version_info.major}.{sys.version_info.minor}')"
+
+if ($PythonVersion -ne "3.14") {
+    throw "Python 3.14 is required. Found: $PythonVersion"
+}
+
 # Создаем виртуальное окружение, если его нет
 if (-not (Test-Path ".venv\Scripts\python.exe")) {
     Write-Host "Creating virtual environment..."
@@ -21,6 +27,12 @@ if (-not (Test-Path ".venv\Scripts\python.exe")) {
 }
 
 $Python = Join-Path $ProjectRoot ".venv\Scripts\python.exe"
+& $Python -c "import sys; assert sys.version_info[:2] == (3, 14), 'Python 3.14 is required'"
+
+if ($LASTEXITCODE -ne 0) {
+    throw "Virtual environment must use Python 3.14"
+}
+
 
 # Устанавливаем зависимости приложения и разработки
 Write-Host "Installing dependencies..."

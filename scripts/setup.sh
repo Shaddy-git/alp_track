@@ -6,19 +6,22 @@ cd "$PROJECT_ROOT"
 
 echo "=== Alp_track: Initial Setup ==="
 
-if ! command -v python3 >/dev/null 2>&1; then
-    echo "ERROR: Python3 is not installed"
+if ! command -v python3.14 >/dev/null 2>&1; then
+    echo "ERROR: Python 3.14 is not installed"
     exit 1
 fi
 
-python3 --version
+python3.14 --version
 
 if [ ! -x ".venv/bin/python" ]; then
     echo "Creating virtual environment..."
-    python3 -m venv .venv
+    python3.14 -m venv .venv
 fi
 
 PYTHON="$PROJECT_ROOT/.venv/bin/python"
+
+"$PYTHON" -c \
+    'import sys; assert sys.version_info[:2] == (3, 14), "Python 3.14 is required"'
 
 echo "Installing dependencies..."
 "$PYTHON" -m pip install -r requirements-dev.txt
