@@ -4,8 +4,6 @@ from marshmallow import ValidationError
 
 from extensions import db
 from models.ascent import Ascent
-from models.mountain import Mountain
-from models.user import User
 from schemas.ascent import AscentSchema, AscentUpdateSchema
 from services.ascent_service import create_ascent, validate_ascent_dates
 from utils.decorators import role_required

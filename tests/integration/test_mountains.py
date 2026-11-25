@@ -132,7 +132,6 @@ def test_duplicate_mountain(client, auth_users, mountain_data):
 
     assert first.status_code == 201
     assert second.status_code == 409
-    
 @pytest.mark.parametrize(
     "field,value",
     [
