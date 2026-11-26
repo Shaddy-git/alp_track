@@ -27,7 +27,10 @@ def list_ascents():
         "group": a.group.name if a.group else None,
         "ascent_date": a.ascent_date.isoformat(),
         "is_successful": a.is_successful,
-        "notes": a.notes
+        "notes": a.notes,
+        "duration_minutes": a.duration_minutes,
+        "elevation_gain_m": a.elevation_gain_m,
+        "effort_rating": a.effort_rating,
     } for a in ascents]), 200
 
 
@@ -48,7 +51,10 @@ def my_ascents():
         "group": a.group.name if a.group else None,
         "ascent_date": a.ascent_date.isoformat(),
         "is_successful": a.is_successful,
-        "notes": a.notes
+        "notes": a.notes,
+        "duration_minutes": a.duration_minutes,
+        "elevation_gain_m": a.elevation_gain_m,
+        "effort_rating": a.effort_rating,
     } for a in ascents]), 200
 
 
@@ -70,7 +76,10 @@ def get_ascent(ascent_id):
         "group": ascent.group.name if ascent.group else None,
         "ascent_date": ascent.ascent_date.isoformat(),
         "is_successful": ascent.is_successful,
-        "notes": ascent.notes
+        "notes": ascent.notes,
+        "duration_minutes": ascent.duration_minutes,
+        "elevation_gain_m": ascent.elevation_gain_m,
+        "effort_rating": ascent.effort_rating,
     }), 200
 
 
@@ -92,7 +101,10 @@ def create():
         group_id=data.get('group_id'),
         ascent_date=data['ascent_date'],
         is_successful=data.get('is_successful', False),
-        notes=data.get('notes')
+        notes=data.get('notes'),
+        duration_minutes=data.get('duration_minutes'),
+        elevation_gain_m=data.get('elevation_gain_m'),
+        effort_rating=data.get('effort_rating'),
     )
     
     if not success:
@@ -108,7 +120,10 @@ def create():
             "mountain_id": ascent.mountain_id,
             "group_id": ascent.group_id,
             "ascent_date": ascent.ascent_date.isoformat(),
-            "is_successful": ascent.is_successful
+            "is_successful": ascent.is_successful,
+            "duration_minutes": ascent.duration_minutes,
+            "elevation_gain_m": ascent.elevation_gain_m,
+            "effort_rating": ascent.effort_rating,
         }
     }), 201
 
@@ -135,7 +150,16 @@ def update(ascent_id):
     if not dates_ok:
         return jsonify({"error": dates_error}), 403
     
-    for field in ['mountain_id', 'group_id', 'ascent_date', 'is_successful', 'notes']:
+    for field in [
+        'mountain_id',
+        'group_id',
+        'ascent_date',
+        'is_successful',
+        'notes',
+        'duration_minutes',
+        'elevation_gain_m',
+        'effort_rating',
+    ]:
         if field in data:
             setattr(ascent, field, data[field])
     

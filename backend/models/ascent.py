@@ -16,6 +16,9 @@ class Ascent(db.Model):
     ascent_date: Mapped[date] = mapped_column(Date, nullable=False)
     is_successful: Mapped[bool] = mapped_column(Boolean, default=False)
     notes: Mapped[str] = mapped_column(Text, nullable=True)
+    duration_minutes: Mapped[int | None] = mapped_column(nullable=True)
+    elevation_gain_m: Mapped[int | None] = mapped_column(nullable=True)
+    effort_rating: Mapped[int | None] = mapped_column(nullable=True)
     
     user = relationship("User", backref="ascents")
     mountain = relationship("Mountain", back_populates="ascents")

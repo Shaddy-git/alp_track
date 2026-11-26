@@ -104,8 +104,17 @@ def validate_ascent_dates(group_id: int, ascent_date) -> tuple[bool, str]:
     return True, ""
 
 
-def create_ascent(user_id: int, mountain_id: int, group_id, ascent_date,
-                  is_successful: bool = False, notes: str = None) -> tuple[bool, str, Ascent | None]:
+def create_ascent(
+        user_id: int, 
+        mountain_id: int, 
+        group_id, 
+        ascent_date,
+        is_successful: bool = False,
+        notes: str = None,
+        duration_minutes: int | None = None,
+        elevation_gain_m: int | None = None,
+        effort_rating: int | None = None,
+    ) -> tuple[bool, str, Ascent | None]:
     """Создаёт восхождение с проверкой всех правил.
     
     Returns:
@@ -154,7 +163,10 @@ def create_ascent(user_id: int, mountain_id: int, group_id, ascent_date,
         group_id=group_id,
         ascent_date=ascent_date,
         is_successful=is_successful,
-        notes=notes
+        notes=notes,
+        duration_minutes=duration_minutes,
+        elevation_gain_m=elevation_gain_m,
+        effort_rating=effort_rating,
     )
     
     db.session.add(ascent)
