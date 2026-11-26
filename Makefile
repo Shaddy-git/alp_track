@@ -1,4 +1,4 @@
-.PHONY: setup test run migrate quality backup restore
+.PHONY: setup test run migrate quality backup restore verify
 
 ifeq ($(OS),Windows_NT)
 PYTHON := .venv/Scripts/python.exe
@@ -30,6 +30,9 @@ backup:
 
 restore:
 	bash scripts/restore.sh "$(BACKUP_FILE)"
+
+verify: quality
+	$(PYTHON) -m pytest tests/ -v --cov=backend --cov-report=term-missing --cov-fail-under=40
 	
 
 

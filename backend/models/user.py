@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, UTC
 from sqlalchemy import String, Integer, DateTime
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from extensions import db
@@ -22,7 +22,10 @@ class User(db.Model):
     # Уровень подготовки: 1 (новичок) - 5 (эксперт)
     experience_level: Mapped[int] = mapped_column(Integer, default=1, nullable=False)
     
-    created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime,
+        default=lambda:datetime.now(UTC).replace(tzinfo=None),
+    )
     
     # Связь M:N с группами через промежуточную таблицу
     groups = relationship("Group", secondary="group_members", back_populates="members")
