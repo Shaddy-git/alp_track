@@ -1,3 +1,4 @@
+import os
 import sys
 from pathlib import Path
 
@@ -17,7 +18,10 @@ def get_test_database_url():
     """Читает и проверяет подключение к тестовой БД."""
 
     settings = dotenv_values(PROJECT_ROOT / ".env.test")
-    database_url = settings.get("TEST_DATABASE_URL")
+    database_url = (
+        os.environ.get("TEST_DATABASE_URL")
+        or settings.get("TEST_DATABASE_URL")
+    )
 
     if not database_url:
         raise RuntimeError(
@@ -29,7 +33,7 @@ def get_test_database_url():
     if (
         url.get_backend_name() != "postgresql"
         or url.database != "alptrack_test"
-        or url.host not in ("localhost", "127.0.0.1")
+        or url.host not in ("localhost", "127.0.0.1", "test-db")
     ):
         raise RuntimeError(
             "Тесты разрешено запускать только с локальной "

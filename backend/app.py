@@ -1,3 +1,4 @@
+import os
 from flask import Flask, jsonify
 from config import Config
 from extensions import db, migrate, jwt
@@ -6,7 +7,14 @@ from extensions import db, migrate, jwt
 def create_app(config_class=Config):
     """Фабрика приложения (Application Factory pattern)."""
     
-    app = Flask(__name__)
+    frontend_dir = os.path.abspath(
+        os.path.join(os.path.dirname(__file__), "..", "frontend")
+    )
+    app = Flask(
+        __name__,
+        static_folder=frontend_dir,
+        static_url_path=""
+    )
     app.config.from_object(config_class)
 
     app.json.ensure_ascii = False
@@ -61,6 +69,10 @@ def create_app(config_class=Config):
     def internal_error(error):
         return jsonify({"error": "Внутренняя ошибка сервера"}), 500
     
+    @app.route("/")
+    def index():
+        return app.send_static_file("index.html")
+
     return app
 
 
