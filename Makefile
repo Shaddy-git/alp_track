@@ -36,3 +36,13 @@ verify: quality
 	
 
 
+
+# Использование системного Python внутри тестового контейнера
+ifeq ($(IN_CONTAINER),1)
+PYTHON := python
+endif
+
+.PHONY: container-check
+
+container-check:
+	bash scripts/container-check.sh

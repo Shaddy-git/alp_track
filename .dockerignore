@@ -1,0 +1,38 @@
+# Git
+.git
+.gitignore
+.gitattributes
+
+# Секреты и локальные настройки
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__
+*.py[cod]
+*.pyo
+*.pyd
+
+# Виртуальные окружения
+venv/
+.venv/
+env/
+
+# Тестирование
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+.coverage.*
+htmlcov/
+
+# Логи
+*.log
+
+# Зависимости frontend
+node_modules/
+
+# Системные файлы
+.DS_Store
+Thumbs.db
